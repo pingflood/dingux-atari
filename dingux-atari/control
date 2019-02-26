@@ -1,0 +1,10 @@
+Package: dingux-atari
+Version: 
+Description: RetroGame port of Dingux-Atari
+Section: emus
+Priority: optional
+Maintainer: pingflood
+Architecture: mipsel
+Homepage: https://github.com/pingflood/dingux-atari
+Depends:
+Source: https://github.com/pingflood/dingux-atari
