@@ -533,7 +533,6 @@ psp_main_menu(void)
 
       if (new_pad & GP2X_CTRL_RIGHT) step = 1;
 
-
       switch (cur_menu_id ) 
       {
         case MENU_LOAD_SLOT : psp_main_menu_cur_slot(step);
@@ -642,10 +641,9 @@ psp_main_menu(void)
 
   psp_kbd_wait_no_button();
 
-  psp_sdl_clear_screen( PSP_MENU_BLACK_COLOR );
-  psp_sdl_flip();
-  psp_sdl_clear_screen( PSP_MENU_BLACK_COLOR );
-  psp_sdl_flip();
+  psp_sdl_clear_screen( PSP_MENU_BLACK_COLOR ); psp_sdl_flip();
+  psp_sdl_clear_screen( PSP_MENU_BLACK_COLOR ); psp_sdl_flip();
+  psp_sdl_clear_screen( PSP_MENU_BLACK_COLOR ); psp_sdl_flip();
 
   psp_sdl_clear_blit(0);
 
