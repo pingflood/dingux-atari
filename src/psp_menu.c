@@ -44,7 +44,7 @@
 
 extern SDL_Surface *back_surface;
 
-enum main_menu{
+enum main_menu {
   //MENU_VOLUME,
 
   MENU_LOAD_SLOT,
@@ -69,7 +69,7 @@ enum main_menu{
   MENU_EXIT,
 
   MAX_MENU_ITEM
-}
+};
 
   static menu_item_t menu_list[] =
   {

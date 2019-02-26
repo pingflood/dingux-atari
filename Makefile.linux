@@ -81,15 +81,15 @@ OBJS = 	./src/gp2x_psp.o \
 
 DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
 
-MORE_CFLAGS = -I. -I$(SYSROOT)/usr/include \
--DNOCRYPT \
-# -DGCW0_MODE \
--DATARI_VERSION=\"$(ATARI_VERSION)\"  \
--O3 -D_GNU_SOURCE=1 -D_REENTRANT -DIS_LITTLE_ENDIAN \
--fsigned-char -ffast-math -fomit-frame-pointer \
--fexpensive-optimizations -fno-strength-reduce  \
--funroll-loops  -finline-functions \
--DNO_STDIO_REDIRECT
+MORE_CFLAGS = -I. -I$(SYSROOT)/usr/include
+MORE_CFLAGS += -DNOCRYPT
+#MORE_CFLAGS +=  -DGCW0_MODE 
+MORE_CFLAGS += -DATARI_VERSION=\"$(ATARI_VERSION)\" 
+MORE_CFLAGS += -O3 -D_GNU_SOURCE=1 -D_REENTRANT -DIS_LITTLE_ENDIAN
+MORE_CFLAGS += -fsigned-char -ffast-math -fomit-frame-pointer
+MORE_CFLAGS += -fexpensive-optimizations -fno-strength-reduce 
+MORE_CFLAGS += -funroll-loops  -finline-functions
+MORE_CFLAGS += -DNO_STDIO_REDIRECT
 
 CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
 LDFLAGS = -s
