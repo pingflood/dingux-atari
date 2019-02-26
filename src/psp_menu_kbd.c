@@ -38,31 +38,30 @@
 #include "psp_menu_kbd.h"
 #include "psp_danzeff.h"
 
-# define MENU_KBD_SKIN       0
-# define MENU_KBD_KBD_SELECT 1
-# define MENU_KBD_UP         2
-# define MENU_KBD_DOWN       3
-# define MENU_KBD_LEFT       4
-# define MENU_KBD_RIGHT      5
-# define MENU_KBD_CROSS      6
-# define MENU_KBD_SQUARE     7
-# define MENU_KBD_TRIANGLE   8
-# define MENU_KBD_CIRCLE     9
-# define MENU_KBD_LTRIGGER  10
-# define MENU_KBD_RTRIGGER  11
-# define MENU_KBD_JOY_UP    12
-# define MENU_KBD_JOY_DOWN  13
-# define MENU_KBD_JOY_LEFT  14
-# define MENU_KBD_JOY_RIGHT 15
-
-# define MENU_KBD_LOAD      16
-# define MENU_KBD_SAVE      17
-# define MENU_KBD_HOTKEYS   18
-# define MENU_KBD_RESET     19
-
-# define MENU_KBD_BACK      20
-
-# define MAX_MENU_KBD_ITEM (MENU_KBD_BACK + 1)
+enum menu_items {
+    MENU_KBD_SKIN,
+    MENU_KBD_KBD_SELECT,
+    MENU_KBD_UP,
+    MENU_KBD_DOWN,
+    MENU_KBD_LEFT,
+    MENU_KBD_RIGHT,
+    MENU_KBD_CROSS,
+    MENU_KBD_SQUARE,
+    MENU_KBD_TRIANGLE,
+    MENU_KBD_CIRCLE,
+    MENU_KBD_LTRIGGER,
+    MENU_KBD_RTRIGGER,
+    MENU_KBD_JOY_UP,
+    MENU_KBD_JOY_DOWN,
+    MENU_KBD_JOY_LEFT,
+    MENU_KBD_JOY_RIGHT,
+    MENU_KBD_LOAD,
+    MENU_KBD_SAVE,
+    MENU_KBD_HOTKEYS,
+    MENU_KBD_RESET,
+    // MENU_KBD_BACK,
+    MAX_MENU_KBD_ITEM
+};
 
   static menu_item_t menu_list[] =
   {
@@ -96,7 +95,7 @@
    { "Save Keyboard" },
    { "Set Hotkeys" },
    { "Reset Keyboard" },
-   { "Back to Menu" }
+   // { "Back to Menu" }
   };
 
   static int cur_menu_id = MENU_KBD_LOAD;
@@ -506,8 +505,8 @@ psp_keyboard_menu(void)
           case MENU_KBD_RESET : psp_keyboard_menu_reset_kbd();
           break;
 
-          case MENU_KBD_BACK  : end_menu = 1;
-          break;
+          // case MENU_KBD_BACK  : end_menu = 1;
+          // break;
         }
       }
 

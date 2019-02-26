@@ -41,16 +41,16 @@
 
 extern SDL_Surface *back_surface;
 
-# define MENU_JOY_ANALOG        0
-# define MENU_JOY_AUTOFIRE_T    1
-# define MENU_JOY_AUTOFIRE_M    2
-
-# define MENU_JOY_LOAD          3
-# define MENU_JOY_SAVE          4
-# define MENU_JOY_RESET         5
-# define MENU_JOY_BACK          6
-
-# define MAX_MENU_JOY_ITEM (MENU_JOY_BACK + 1)
+enum menu_items {
+MENU_JOY_ANALOG,
+MENU_JOY_AUTOFIRE_T,
+MENU_JOY_AUTOFIRE_M,
+MENU_JOY_LOAD,
+MENU_JOY_SAVE,
+MENU_JOY_RESET,
+// MENU_JOY_BACK,
+MAX_MENU_JOY_ITEM
+};
 
   static menu_item_t menu_list[] =
   {
@@ -62,7 +62,7 @@ extern SDL_Surface *back_surface;
     { "Save joystick"       },
     { "Reset joystick"      },
 
-    { "Back to Menu"        }
+    // { "Back to Menu"        }
   };
 
   static int cur_menu_id = MENU_JOY_LOAD;
@@ -290,8 +290,8 @@ psp_joystick_menu(void)
         break;                     
         case MENU_JOY_RESET      : psp_joystick_menu_reset();
         break;                     
-        case MENU_JOY_BACK       : end_menu = 1;
-        break;                     
+        // case MENU_JOY_BACK       : end_menu = 1;
+        // break;                     
       }
 
     } else

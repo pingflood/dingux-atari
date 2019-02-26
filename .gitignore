@@ -2,3 +2,5 @@
 *.dge
 *.ipk
 *.opk
+stderr.txt
+stdout.txt

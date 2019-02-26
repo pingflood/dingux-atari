@@ -42,28 +42,30 @@
 
 extern SDL_Surface *back_surface;
 
-# define MENU_CHEAT_OLD_VAL   0
-# define MENU_CHEAT_NEW_VAL   1
-# define MENU_CHEAT_POKE      2
-# define MENU_CHEAT_ADD       3
+enum menu_items {
+  MENU_CHEAT_OLD_VAL,
+  MENU_CHEAT_NEW_VAL,
+  MENU_CHEAT_POKE,
+  MENU_CHEAT_ADD,
 
-# define MENU_CHEAT_RAM       4
+  MENU_CHEAT_RAM,
 
-# define MENU_CHEAT_ENABLE    5
-# define MENU_CHEAT_ALL       6
-# define MENU_CHEAT_VALUE     7
-# define MENU_CHEAT_IMPORT    8
-# define MENU_CHEAT_EDIT      9
+  MENU_CHEAT_ENABLE,
+  MENU_CHEAT_ALL,
+  MENU_CHEAT_VALUE,
+  MENU_CHEAT_IMPORT,
+  MENU_CHEAT_EDIT,
 
-# define MENU_CHEAT_DEL      10
+  MENU_CHEAT_DEL,
 
-# define MENU_CHEAT_LOAD     11
-# define MENU_CHEAT_SAVE     12
-# define MENU_CHEAT_RESET    13
-                                 
-# define MENU_CHEAT_BACK     14
+  MENU_CHEAT_LOAD,
+  MENU_CHEAT_SAVE,
+  MENU_CHEAT_RESET,
+                                   
+  // MENU_CHEAT_BACK,
 
-# define MAX_MENU_CHEAT_ITEM (MENU_CHEAT_BACK + 1)
+  MAX_MENU_CHEAT_ITEM
+};
 
   static menu_item_t menu_list[] =
   {
@@ -85,7 +87,7 @@ extern SDL_Surface *back_surface;
     { "Save cheat" },
     { "Reset cheat" },
 
-    { "Back to Menu"         }
+    // { "Back to Menu" }
   };
 
 # define MAX_SCAN_ADDR    10
@@ -634,8 +636,8 @@ psp_cheat_menu(void)
         case MENU_CHEAT_RESET : psp_cheat_menu_reset_cheat();
         break;
 
-        case MENU_CHEAT_BACK : end_menu = 1;
-        break;
+        // case MENU_CHEAT_BACK : end_menu = 1;
+        // break;
       }
 
 

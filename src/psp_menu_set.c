@@ -40,34 +40,36 @@
 
 extern SDL_Surface *back_surface;
 
-# define MENU_SET_SOUND         0
-# define MENU_SET_VIEW_FPS      1
-# define MENU_SET_SPEED_LIMIT   2
-# define MENU_SET_SKIP_FPS      3
-# define MENU_SET_RENDER        4
-# define MENU_SET_DANZEFF       5
-# define MENU_SET_VSYNC         6
+enum menu_items {
+  MENU_SET_VIEW_FPS,
+  MENU_SET_SKIP_FPS,
+  MENU_SET_SPEED_LIMIT,
+  MENU_SET_SOUND,
+  MENU_SET_RENDER,
+  MENU_SET_DANZEFF,
+  MENU_SET_VSYNC,
 
-# define MENU_SET_LOAD          7
-# define MENU_SET_SAVE          8
-# define MENU_SET_RESET         9
-# define MENU_SET_BACK         10
+  MENU_SET_LOAD,
+  MENU_SET_SAVE,
+  MENU_SET_RESET,
+  // MENU_SET_BACK,
 
-# define MAX_MENU_SET_ITEM (MENU_SET_BACK + 1)
+  MAX_MENU_SET_ITEM
+};
 
   static menu_item_t menu_list[] =
   {
-    { "Sound enable       :"},
-    { "Display fps        :"},
+    { "Display FPS        :"},
+    { "Frameskip          :"},
     { "Speed limiter      :"},
-    { "Skip frame         :"},
+    { "Sound enable       :"},
     { "Render mode        :"},
     { "Virtual keyboard   :"},
     { "Vsync              :"},
     { "Load settings"        },
     { "Save settings"        },
     { "Reset settings"       },
-    { "Back to Menu"         }
+    // { "Back to Menu"         }
   };
 
   static int cur_menu_id = MENU_SET_LOAD;
@@ -363,8 +365,8 @@ psp_settings_menu(void)
         case MENU_SET_RESET      : psp_settings_menu_reset();
         break;
 
-        case MENU_SET_BACK       : end_menu = 1;
-        break;
+        // case MENU_SET_BACK       : end_menu = 1;
+        // break;
       }
 
     } else
