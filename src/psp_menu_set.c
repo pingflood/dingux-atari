@@ -72,7 +72,7 @@ enum menu_items {
     // { "Back to Menu"         }
   };
 
-  static int cur_menu_id = MENU_SET_LOAD;
+  static int cur_menu_id = 0;
 
   static int atari_snd_enable     = 0;
   static int atari_render_mode    = 0;
@@ -89,15 +89,11 @@ psp_display_screen_settings_menu(void)
   char buffer[64];
   int menu_id = 0;
   int color   = 0;
-  int x       = 0;
-  int y       = 0;
-  int y_step  = 0;
+  int x       = 10;
+  int y       = 20;
+  int y_step  = 10;
 
   psp_sdl_blit_help();
-
-  x      = 10;
-  y      =  5;
-  y_step = 10;
 
   for (menu_id = 0; menu_id < MAX_MENU_SET_ITEM; menu_id++) {
     color = PSP_MENU_TEXT_COLOR;
@@ -156,7 +152,7 @@ psp_display_screen_settings_menu(void)
     y += y_step;
   }
 
-  // psp_menu_display_save_name();
+  psp_menu_display_save_name();
 }
 
 static void
