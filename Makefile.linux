@@ -83,7 +83,8 @@ DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
 
 MORE_CFLAGS = -I. -I$(SYSROOT)/usr/include \
 -DNOCRYPT \
--DGCW0_MODE -DATARI_VERSION=\"$(ATARI_VERSION)\"  \
+# -DGCW0_MODE \
+-DATARI_VERSION=\"$(ATARI_VERSION)\"  \
 -O3 -D_GNU_SOURCE=1 -D_REENTRANT -DIS_LITTLE_ENDIAN \
 -fsigned-char -ffast-math -fomit-frame-pointer \
 -fexpensive-optimizations -fno-strength-reduce  \
