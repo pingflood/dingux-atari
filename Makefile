@@ -17,39 +17,71 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
+CHAINPREFIX := /opt/mipsel-linux-uclibc
+CROSS_COMPILE := $(CHAINPREFIX)/usr/bin/mipsel-linux-
+
+CC = $(CROSS_COMPILE)gcc
+CXX = $(CROSS_COMPILE)g++
+STRIP = $(CROSS_COMPILE)strip
+
+SYSROOT     := $(shell $(CC) --print-sysroot)
+
+SDL_CONFIG = $(SYSROOT)/usr/bin/sdl-config
 
 ATARI_VERSION	= 1.1.0
-TARGET			= dingux-atari
-ZERODEV_PATH	= /opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr
-BINARIES_PATH	= /opt/gcw0-toolchain/usr/bin
+TARGET			= ./dingux-atari/dingux-atari.dge
 
-SDL_CONFIG = $(ZERODEV_PATH)/bin/sdl-config
-
-OBJS = 	gp2x_psp.o \
-		antic.o atari.o atari_sdl.o binload.o \
-		cartridge.o cassette.o colours.o compfile.o cpu.o cycle_map.o \
-		devices.o gtia.o input.o log.o memory.o monitor.o  \
-		pbi.o pia.o pokey.o pokeysnd.o remez.o rtime.o screen.o sio.o \
-		statesav.o ui_basic.o ui.o util.o \
-		psp_main.o psp_kbd.o psp_danzeff.o psp_sdl.o psp_font.o \
-		psp_fmgr.o psp_menu.o  psp_menu_kbd.o psp_menu_set.o \
-		psp_menu_help.o \
-		miniunz.o ioapi.o unzip.o \
-		psp_joy.o \
-		psp_menu_cheat.o \
-		psp_menu_list.o \
-		psp_menu_joy.o \
-		psp_editor.o
-
-
-
-CC		= $(BINARIES_PATH)/mipsel-linux-gcc
-CXX		= $(BINARIES_PATH)/mipsel-linux-g++
-STRIP	= $(BINARIES_PATH)/mipsel-linux-strip
+OBJS = 	./src/gp2x_psp.o \
+		./src/antic.o \
+		./src/atari.o \
+		./src/atari_sdl.o \
+		./src/binload.o \
+		./src/cartridge.o \
+		./src/cassette.o \
+		./src/colours.o \
+		./src/compfile.o \
+		./src/cpu.o \
+		./src/cycle_map.o \
+		./src/devices.o \
+		./src/gtia.o \
+		./src/input.o \
+		./src/log.o \
+		./src/memory.o \
+		./src/monitor.o \
+		./src/pbi.o \
+		./src/pia.o \
+		./src/pokey.o \
+		./src/pokeysnd.o \
+		./src/remez.o \
+		./src/rtime.o \
+		./src/screen.o \
+		./src/sio.o \
+		./src/statesav.o \
+		./src/ui_basic.o \
+		./src/ui.o \
+		./src/util.o \
+		./src/psp_main.o \
+		./src/psp_kbd.o \
+		./src/psp_danzeff.o \
+		./src/psp_sdl.o \
+		./src/psp_font.o \
+		./src/psp_fmgr.o \
+		./src/psp_menu.o \
+		./src/psp_menu_kbd.o \
+		./src/psp_menu_set.o \
+		./src/psp_menu_help.o \
+		./src/miniunz.o \
+		./src/ioapi.o \
+		./src/unzip.o \
+		./src/psp_joy.o \
+		./src/psp_menu_cheat.o \
+		./src/psp_menu_list.o \
+		./src/psp_menu_joy.o \
+		./src/psp_editor.o \
 
 DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
 
-MORE_CFLAGS = -I. -I$(ZERODEV_PATH)/usr/include \
+MORE_CFLAGS = -I. -I$(SYSROOT)/usr/include \
 -DNOCRYPT \
 -DGCW0_MODE -DATARI_VERSION=\"$(ATARI_VERSION)\"  \
 -mips32 -O3 -D_GNU_SOURCE=1 -D_REENTRANT -DIS_LITTLE_ENDIAN \
@@ -61,7 +93,7 @@ MORE_CFLAGS = -I. -I$(ZERODEV_PATH)/usr/include \
 CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
 LDFLAGS = -s
 
-LIBS += -L$(ZERODEV_PATH)/lib \
+LIBS += -L$(SYSROOT)/lib \
 -lSDL \
 -lSDL_image \
 -lpng -lz -lm -lpthread -lstdc++ -ldl
