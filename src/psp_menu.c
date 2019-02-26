@@ -60,7 +60,7 @@ enum main_menu {
   MENU_ORIGINAL,
 
   // MENU_EDITOR,
-  MENU_CHEATS,
+  // MENU_CHEATS,
   MENU_KEYBOARD,
   MENU_JOYSTICK,
   MENU_SETTINGS,
@@ -89,7 +89,7 @@ enum main_menu {
     { "Atari menu" },
 
     // { "Comments" },
-    { "Cheats" },
+    // { "Cheats" },
     { "Keyboard" },
     { "Joystick" },
     { "Settings" },
@@ -442,28 +442,26 @@ psp_main_menu_exit(void)
 {
   gp2xCtrlData c;
 
-  psp_display_screen_menu();
-  psp_sdl_back2_print( 140, 100, "press B to confirm !", PSP_MENU_WARNING_COLOR);
-  psp_sdl_flip();
+  // psp_display_screen_menu();
+  // psp_sdl_back2_print( 140, 100, "press B to confirm !", PSP_MENU_WARNING_COLOR);
+  // psp_sdl_flip();
 
-  psp_kbd_wait_no_button();
+  // psp_kbd_wait_no_button();
 
-  do
-  {
-    gp2xCtrlReadBufferPositive(&c, 1);
-    c.Buttons &= PSP_ALL_BUTTON_MASK;
+  // do
+  // {
+  //   gp2xCtrlReadBufferPositive(&c, 1);
+  //   c.Buttons &= PSP_ALL_BUTTON_MASK;
 
-    if (c.Buttons & GP2X_CTRL_CROSS) {
-      psp_sdl_clear_screen(0);
-      psp_sdl_flip();
-      psp_sdl_clear_screen(0);
-      psp_sdl_flip();
+  //   if (c.Buttons & GP2X_CTRL_CROSS) {
+      psp_sdl_clear_screen(0); psp_sdl_flip();
+      psp_sdl_clear_screen(0); psp_sdl_flip();
       psp_sdl_exit(0);
-    }
+    // }
 
-  } while (c.Buttons == 0);
+  // } while (c.Buttons == 0);
 
-  psp_kbd_wait_no_button();
+  // psp_kbd_wait_no_button();
 
   return 0;
 }
@@ -575,9 +573,9 @@ psp_main_menu(void)
         //                       old_pad = new_pad = 0;
         // break;
 
-        case MENU_CHEATS    : psp_cheat_menu();
-                              old_pad = new_pad = 0;
-        break;
+        // case MENU_CHEATS    : psp_cheat_menu();
+        //                       old_pad = new_pad = 0;
+        // break;
 
         case MENU_KEYBOARD   : psp_keyboard_menu();
                                old_pad = new_pad = 0;
