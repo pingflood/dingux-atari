@@ -41,7 +41,7 @@ char memory_log[MAX_LOG_SIZE] = "";
 
 void Aprint(char *format, ...)
 {
-# if 0 //LUDO:
+#if 1 //LUDO:
 	va_list args;
 	char buffer[8192];
 #ifdef BUFFERED_LOG

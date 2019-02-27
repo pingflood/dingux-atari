@@ -1047,7 +1047,7 @@ psp_update_keys(void)
   int         b;
   gp2xCtrlData  c;
 
-  static char first_time = 1;
+  static char first_time = 0;
   static int release_pending = 0;
 
   if (first_time) {

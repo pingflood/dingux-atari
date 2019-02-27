@@ -554,7 +554,7 @@ int Atari800_OpenFile(const char *filename, int reboot, int diskno, int readonly
 	case AFILE_ROM:
 		/* TODO: select format for ROMs; switch 5200 ? */
 		if (CART_Insert(filename) != 0) {
-# if 1 //LUDO:
+#if 1 //LUDO:
       return AFILE_ERROR;
 # else
       cart_type = CART_5200_32;
@@ -952,7 +952,7 @@ int Atari800_WriteConfig(void)
 
 int Atari800_Initialise(int *argc, char *argv[])
 {
-# if 0 //LUDO:
+#if 1 //LUDO:
 	int i, j;
 # endif
 	const char *rom_filename = NULL;
@@ -988,7 +988,8 @@ int Atari800_Initialise(int *argc, char *argv[])
 	int got_config;
 	int help_only = FALSE;
 
-# if 0 //LUDO:
+#if 1 //LUDO:
+
 	if (*argc > 1) {
 		for (i = j = 1; i < *argc; i++) {
 			if (strcmp(argv[i], "-config") == 0) {
@@ -1082,8 +1083,10 @@ int Atari800_Initialise(int *argc, char *argv[])
 
 #endif /* __PLUS */
 
-# if 0 //LUDO:
+#if 1 //LUDO:
 	for (i = j = 1; i < *argc; i++) {
+	printf("argc: %d %s\n", *argc, argv[i]);
+		
 		if (strcmp(argv[i], "-atari") == 0) {
 			if (machine_type != MACHINE_OSA) {
 				machine_type = MACHINE_OSB;
@@ -1185,6 +1188,7 @@ int Atari800_Initialise(int *argc, char *argv[])
 #endif
 			else {
 				/* all options known to main module tried but none matched */
+	printf("argc: %d %s\n", *argc, argv[i]);
 
 				if (strcmp(argv[i], "-help") == 0) {
 #ifndef __PLUS
@@ -1278,7 +1282,7 @@ int Atari800_Initialise(int *argc, char *argv[])
 
 #endif /* __PLUS */
 
-# if 0 //LUDO:
+#if 1 //LUDO:
 	/* Auto-start files left on the command line */
 	j = 1; /* diskno */
 	for (i = 1; i < *argc; i++) {
@@ -1597,7 +1601,7 @@ static void Atari_sleep(double s)
 		tp.tv_usec = s * 1e6;
 		select(1, NULL, NULL, NULL, &tp);
 #else
-# if 0  //LUDO:
+#if 0  //LUDO:
 		double curtime = Atari_time();
 		while ((curtime + s) > Atari_time());
 # else
