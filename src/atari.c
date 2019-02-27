@@ -336,7 +336,7 @@ static int load_image(const char *filename, UBYTE *buffer, int nbytes)
 #if defined(GCW0_MODE)
 	if(!strstr(filename, "/")){
 		char filename_tmp[MAX_PATH];
-		sprintf(filename_tmp, "%s/.atari/roms/%s", getenv("HOME"), filename);
+		snprintf(filename_tmp, MAX_PATH, "%s/roms/%s", ATARI.atari_home_dir, filename);
 		strcpy(filename, filename_tmp);
 	}
 #endif
@@ -668,11 +668,14 @@ int Atari800_ReadConfig(const char *alternate_config_filename)
 	}
 	/* else use the default config name under the HOME folder */
 	else {
-		char *home = getenv("HOME");
-		if (home != NULL)
-			Util_catpath(rtconfig_filename, home, DEFAULT_CFG_NAME);
-		else
-			strcpy(rtconfig_filename, DEFAULT_CFG_NAME);
+		// char filename_tmp[MAX_PATH];
+		snprintf(rtconfig_filename, MAX_PATH, "%s/atari800.cfg", ATARI.atari_home_dir);
+		// // strcpy(filename, filename_tmp);
+		// char *home = getenv("HOME");
+		// if (home != NULL)
+		// 	Util_catpath(rtconfig_filename, home, DEFAULT_CFG_NAME);
+		// else
+		// 	strcpy(rtconfig_filename, DEFAULT_CFG_NAME);
 	}
 
 	fp = fopen(fname, "r");
@@ -1012,52 +1015,17 @@ int Atari800_Initialise(int *argc, char *argv[])
 	}
 # endif
 
-#if defined(GCW0_MODE)
-	static char *dir1, *dir2, *dir3, *dir4, *dir5, *dir6, *dir7, *dir8, *dir9;
-	dir1 = malloc(strlen(getenv("HOME")) + 24);
-	sprintf(dir1, "%s/.atari/", getenv("HOME"));
-	mkdir(dir1, 0777);
-	free (dir1);
-	dir2 = malloc(strlen(getenv("HOME")) + 24);
-	sprintf(dir2, "%s/.atari/save/", getenv("HOME"));
-	mkdir(dir2, 0777);
-	free (dir2);
-	dir3 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir3, "%s/.atari/set/", getenv("HOME"));
-	mkdir(dir3, 0777);
-	free (dir3);
-	dir4 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir4, "%s/.atari/txt/", getenv("HOME"));
-	mkdir(dir4, 0777);
-	free (dir4);
-	dir5 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir5, "%s/.atari/kbd/", getenv("HOME"));
-	mkdir(dir5, 0777);
-	free (dir5);
-	dir6 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir6, "%s/.atari/joy/", getenv("HOME"));
-	mkdir(dir6, 0777);
-	free (dir6);
-	dir7 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir7, "%s/.atari/cht/", getenv("HOME"));
-	mkdir(dir7, 0777);
-	free (dir7);
-	dir8 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir8, "%s/.atari/scr/", getenv("HOME"));
-	mkdir(dir8, 0777);
-	free (dir8);
-	dir9 = malloc(strlen(getenv("HOME")) + 28);
-	sprintf(dir9, "%s/.atari/roms/", getenv("HOME"));
-	mkdir(dir9, 0777);
-	free (dir9);
-#endif;
-
-memset(&ATARI, 0, sizeof(ATARI_t));
-#if defined(GCW0_MODE)
-	sprintf(ATARI.atari_home_dir, "%s/.atari/", getenv("HOME"));
-#else
-	getcwd(ATARI.atari_home_dir,MAX_PATH);
- #endif
+  static char home_dir[MAX_PATH];
+  snprintf(ATARI.atari_home_dir, sizeof(ATARI.atari_home_dir), "%s/.dingux-atari", getenv("HOME")); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/cht",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/joy",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/kbd",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/roms",  ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/save",  ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/scr",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/set",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/state", ATARI.atari_home_dir); mkdir(home_dir, 0777);
+  snprintf(home_dir, MAX_PATH, "%s/txt",   ATARI.atari_home_dir); mkdir(home_dir, 0777);
 
   atari_default_settings();
   psp_joy_default_settings();
@@ -1078,11 +1046,9 @@ memset(&ATARI, 0, sizeof(ATARI_t));
 	/* try to find ROM images if the configuration file is not found
 	   or it does not specify some ROM paths (blank paths count as specified) */
 	char atari800_exe_rom_dir[FILENAME_MAX];
-	sprintf(atari800_exe_rom_dir, "%s/.atari/roms/", getenv("HOME"));
+	snprintf(atari800_exe_rom_dir, FILENAME_MAX, "%s/roms",  ATARI.atari_home_dir);
 	Atari800_FindROMImages(atari800_exe_rom_dir, FALSE); /* current directory */
-#if defined(unix) || defined(__unix__) || defined(__linux__)
-	Atari800_FindROMImages("/usr/share/atari800", TRUE);
-#endif
+
 	if (*argc > 0 && argv[0] != NULL) {
 		char atari800_exe_dir[FILENAME_MAX];
 		/* the directory of the Atari800 program */
