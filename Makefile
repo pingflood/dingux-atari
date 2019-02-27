@@ -105,11 +105,23 @@ LIBS += -L$(SYSROOT)/lib \
 .cpp.o:
 	$(CXX) $(CFLAGS) -c $< -o $@
 
-all: $(OBJS)
+$(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJS) $(LIBS) -o $(TARGET) && $(STRIP) $(TARGET)
 
-install: $(TARGET)
-	cp $< /media/dingux/local/emulators/dingux-atari/
+ipk: $(TARGET)
+	@rm -rf /tmp/.dingux-atari-ipk/ && mkdir -p /tmp/.dingux-atari-ipk/root/home/retrofw/emus/dingux-atari /tmp/.dingux-atari-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators /tmp/.dingux-atari-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
+	@cp -r dingux-atari/dingux-atari.dge dingux-atari/dingux-atari.man.txt dingux-atari/dingux-atari.png dingux-atari/splash.png dingux-atari/graphics /tmp/.dingux-atari-ipk/root/home/retrofw/emus/dingux-atari
+	@cp dingux-atari/dingux-atari.lnk /tmp/.dingux-atari-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators
+	@cp dingux-atari/atari800.dingux-atari.lnk dingux-atari/atari5200.dingux-atari.lnk /tmp/.dingux-atari-ipk/root/home/retrofw/apps/gmenu2x/sections/emulators.systems
+	@sed "s/^Version:.*/Version: $$(date +%Y%m%d)/" dingux-atari/control > /tmp/.dingux-atari-ipk/control
+	@cp dingux-atari/conffiles /tmp/.dingux-atari-ipk/
+	@tar --owner=0 --group=0 -czvf /tmp/.dingux-atari-ipk/control.tar.gz -C /tmp/.dingux-atari-ipk/ control conffiles
+	@tar --owner=0 --group=0 -czvf /tmp/.dingux-atari-ipk/data.tar.gz -C /tmp/.dingux-atari-ipk/root/ .
+	@echo 2.0 > /tmp/.dingux-atari-ipk/debian-binary
+	@ar r dingux-atari/dingux-atari.ipk /tmp/.dingux-atari-ipk/control.tar.gz /tmp/.dingux-atari-ipk/data.tar.gz /tmp/.dingux-atari-ipk/debian-binary
+
+# install: $(TARGET)
+# 	cp $< /media/dingux/local/emulators/dingux-atari/
 
 clean:
 	rm -f $(OBJS) $(TARGET)
