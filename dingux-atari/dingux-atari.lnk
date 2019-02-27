@@ -1,6 +1,6 @@
 title=Dingux Atari
-description=Atari 800-5200 Emulator
+description=Atari 800 Emulator
 exec=/home/retrofw/emus/dingux-atari/dingux-atari.dge
-selectordir=/home/retrofw/roms/atari5200
-selectorfilter=.zip,.bin,.a52
+selectordir=/home/retrofw/roms/atari800
+selectorfilter=.rom,.bin,.atr,.a52,.zip
 clock=600
